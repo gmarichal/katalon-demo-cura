@@ -4,7 +4,7 @@ require 'config.php';
 require 'underscore.php';
 
 class _f extends __{
-    public function render($page_name, $data = array(), $include_main_template = false) {
+    public static function render($page_name, $data = array(), $include_main_template = false) {
         if (!self::isArray($data)) {
             die("Invalid data type input! Data must be an array of keys and values.");
         }
@@ -39,7 +39,7 @@ class _f extends __{
         return isset($_SESSION[SESSION_KEY_IS_LOGGED_IN]) && $_SESSION[SESSION_KEY_IS_LOGGED_IN] === true;
     }
 
-    public function login($user, $password){
+    public static function login($user, $password){
         if (self::is_user_logged_in()) {
             return true;
         }
@@ -57,13 +57,13 @@ class _f extends __{
         return false;
     }
 
-    public function logout(){
+    public static function logout(){
         session_unset();
         return session_destroy();
     }
 
     // Get HTTP GET value
-    public function get($param = '') {
+    public static function get($param = '') {
         if (!self::isString($param)) {
             return null;
         }
@@ -71,14 +71,14 @@ class _f extends __{
     }
 
     // Get HTTP POST value
-    public function post($param = '') {
+    public static function post($param = '') {
         if (!self::isString($param)) {
             return null;
         }
         return $_POST[$param];
     }
 
-    public function getError() {
+    public static function getError() {
         $current = time();
         $error_time = $_SESSION[SESSION_KEY_ERROR_TIME];
         if (!isset($error_time) || $error_time === null) {
@@ -92,7 +92,7 @@ class _f extends __{
         return $_SESSION[SESSION_KEY_ERROR];
     }
 
-    public function redirect($url) {
+    public static function redirect($url) {
         header('Location: ' . $url);
     }
 }
