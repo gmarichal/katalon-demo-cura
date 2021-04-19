@@ -35,7 +35,7 @@ class _f extends __{
         }
     }
 
-    public function is_user_logged_in(){
+    public static function is_user_logged_in(){
         return isset($_SESSION[SESSION_KEY_IS_LOGGED_IN]) && $_SESSION[SESSION_KEY_IS_LOGGED_IN] === true;
     }
 
